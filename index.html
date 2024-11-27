@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invent Store</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="root">
+        <!-- Landing Page -->
+        <div id="landingPage" class="landing-page">
+            <div class="landing-content">
+                <h1>Welcome to Invent Store</h1>
+                <div class="landing-buttons">
+                    <button id="enterMarketplace" class="primary-button">Enter Marketplace</button>
+                    <button id="enterAdmin" class="secondary-button">Admin Dashboard</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Marketplace View -->
+        <div id="marketplaceView" class="marketplace-view" style="display: none;">
+            <div class="top-nav">
+                <div class="nav-left">
+                    <button id="marketplaceBack" class="back-button">←</button>
+                    <h2>Marketplace</h2>
+                </div>
+
+                <div class="nav-right">
+                    <div class="user-info">
+                        <span class="user-status">nick.yankovsky@invent.us</span>
+                    </div>
+
+                    <div id="cartButton" class="cart-container">
+                        <span class="cart-icon">🛒</span>
+                        <span id="cartCount" class="cart-count">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="sidebar">
+                    <div class="search-container">
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="globalSearch" placeholder="Search apps...">
+                        </div>
+                    </div>
+
+                    <div class="categories-container">
+                        <h3>Categories</h3>
+                        <ul class="category-list">
+                            <li class="category-item" data-category="Bundled Products">
+                                <span class="category-icon">📦</span>
+                                Bundled Products
+                            </li>
+                            <li class="category-item" data-category="Data Apps">
+                                <span class="category-icon">📊</span>
+                                Data Apps
+                            </li>
+                            <li class="category-group">
+                                <div class="group-header">
+                                    <span class="category-icon">🔹</span>
+                                    Micro Apps
+                                </div>
+                                <ul class="subcategory-list">
+                                    <li class="category-item" data-category="CRM">
+                                        <span class="category-icon">👥</span>
+                                        CRM
+                                    </li>
+                                    <li class="category-item" data-category="Financial Planning">
+                                        <span class="category-icon">📈</span>
+                                        Financial Planning
+                                    </li>
+                                    <li class="category-item" data-category="Portfolio Management">
+                                        <span class="category-icon">📊</span>
+                                        Portfolio Management
+                                    </li>
+                                    <li class="category-item" data-category="Trading & Rebalancing">
+                                        <span class="category-icon">💱</span>
+                                        Trading & Rebalancing
+                                    </li>
+                                    <li class="category-item" data-category="Risk Analysis">
+                                        <span class="category-icon">⚠️</span>
+                                        Risk Analysis
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <main class="main-content">
+                    <div class="catalog-header">
+                        <h1>Welcome to Invent Store Catalog — Wealth Management Glue</h1>
+                        <p>Here you can find and add new features to your system.</p>
+                    </div>
+
+                    <div class="filters">
+                        <div class="filter-group">
+                            <select id="statusFilter">
+                                <option value="All">All Status</option>
+                                <option value="Installed">Installed</option>
+                                <option value="Available">Available</option>
+                                <option value="Popular">Popular</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <select id="sortOptions">
+                                <option value="Alphabetical">Sort by Name</option>
+                                <option value="Popularity">Sort by Popularity</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="categoryView">
+                        <h2 id="categoryTitle">Bundled Products</h2>
+                        <div id="productGrid" class="grid"></div>
+                    </div>
+
+                    <div id="appPage" class="app-page"></div>
+                    <div id="cartPage" class="cart-page"></div>
+                </main>
+            </div>
+        </div>
+
+        <!-- Admin View -->
+        <div id="adminView" class="admin-view" style="display: none;">
+            <div class="top-nav">
+                <div class="nav-left">
+                    <button id="adminBack" class="back-button">←</button>
+                    <h2>Admin Dashboard</h2>
+                </div>
+            </div>
+
+            <div class="admin-container">
+                <div class="admin-sidebar">
+                    <button class="admin-nav-button" data-section="bundled">
+                        Bundled Products
+                    </button>
+                    <button class="admin-nav-button" data-section="microapps">
+                        Micro Apps
+                    </button>
+                    <button class="admin-nav-button" data-section="dataapps">
+                        Data Apps
+                    </button>
+                </div>
+
+                <div class="admin-content">
+                    <!-- Bundled Products Section -->
+                    <div id="adminBundled" class="admin-section" style="display: none;">
+                        <div class="admin-header">
+                            <h2>Manage Bundled Products</h2>
+                            <button id="addBundle" class="add-button">Add New Bundle</button>
+                        </div>
+                        <div id="bundlesList" class="items-grid"></div>
+                        <div id="bundleForm" class="admin-form" style="display: none;"></div>
+                    </div>
+
+                    <!-- Micro Apps Section -->
+                    <div id="adminMicroapps" class="admin-section" style="display: none;">
+                        <div class="admin-header">
+                            <h2>Manage Micro Apps</h2>
+                            <button id="addApp" class="add-button">Add New App</button>
+                        </div>
+                        <div class="filters">
+                            <select id="microappCategoryFilter">
+                                <option value="All">All Categories</option>
+                                <option value="CRM">CRM</option>
+                                <option value="Financial Planning">Financial Planning</option>
+                                <option value="Portfolio Management">Portfolio Management</option>
+                                <option value="Trading & Rebalancing">Trading & Rebalancing</option>
+                                <option value="Risk Analysis">Risk Analysis</option>
+                            </select>
+                        </div>
+                        <div id="microappsList" class="items-grid"></div>
+                        <div id="appForm" class="admin-form" style="display: none;"></div>
+                    </div>
+
+                    <!-- Data Apps Section -->
+                    <div id="adminDataapps" class="admin-section" style="display: none;">
+                        <div class="admin-header">
+                            <h2>Manage Data Apps</h2>
+                            <button id="addAppData" class="add-button">Add New Data App</button>
+                        </div>
+                        <div id="dataappsList" class="items-grid"></div>
+                        <div id="appFormData" class="admin-form" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification -->
+        <div id="notification" class="notification"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
